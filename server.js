@@ -1,13 +1,15 @@
 const express = require('express');
 const path = require('path');
-const notesDB = require('./db/db.json');
 const fs = require('fs');
-const { data } = require('jquery');
-const { error } = require('console');
+const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
+const uuid = require('./helpers/uuid');
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
@@ -27,38 +29,32 @@ app.get('/notes', (req, res) => {
 
 // get all notes
 app.get('/api/notes', (req, res) => {
-    res.json(notesDB);
+    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
 // post new note
 app.post('/api/notes', (req, res) => {
-    // const { title, text } = req.body;
-    // if (title && text){
-    //     const newNote = {
-    //         title,
-    //         text
-    //     }
+  const { title, text } = req.body;
 
-    //     const noteString = JSON.stringify(newNote);
+  if (title && text) {
+    const newNote = {
+      title,
+      text,
+      id: uuid()
+    };
 
-    //     fs.writeFile(`./db/db.json`, noteString, (err) =>
-    //     err
-    //         ? console.error(err)
-    //         : console.log(
-    //             `nice`
-    //         )
-    //     );
-  
-    //     const response = {
-    //         status: 'success',
-    //         body: newNote,
-    //     };
+    readAndAppend(newNote, './db/db.json');
 
-    //     console.log(response);
-    //     res.status(201).json(response);
-    // } else {
-    //     res.status(500).json('yikes')
-    // }
+    const response = {
+      status: 'success',
+      body: newNote,
+    };
+
+    res.json(response);
+  } else {
+    res.json('Error in posting feedback');
+  }
+
 });
 
 
