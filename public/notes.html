@@ -16,10 +16,31 @@
         
     </nav>
       <div class="container">
-        <div style="margin-top: 80px;" class="text-center p-5 mb-4 bg-light">
-          <h1 class="display-4">Note Taker</h1>
-          <h4 class="mt-4">Take notes with Express</h4>
-          <a class="btn btn-primary btn-lg mt-4" href="/notes" role="button">Get Started</a>
+        <div style="margin-top: 80px;" class="row text-center p-5 mb-4 bg-light">
+            <div class="col-4 list-container">
+                <div class="card">
+                  <ul class="list-group"></ul>
+                </div>
+              </div>
+          <div class="col-8">
+            <h2 class="display-7">Title</h2>
+            <textarea
+              name="title"
+              id="note-title"
+              placeholder="Enter a title"
+              value=""
+              class="form-input w-100"
+            ></textarea>
+            <h2 class="display-7">Text</h2>
+            <textarea
+              name="text"
+              id="note-text"
+              placeholder="Enter note text"
+              value=""
+              class="form-input w-100"
+            ></textarea>
+            <button type="button" id="save-note" class="btn btn-dark">Save Note</button>
+          </div>
         </div>
       </div>
     <script src="./js/index.js"></script>
