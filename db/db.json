@@ -1,22 +1,3 @@
 [
-    {
-        "title": "Go to the store",
-        "text": "Buy milk, eggs, bread",
-        "id": "1234"
-    },
-    {
-        "title": "Walk the dog",
-        "text": "5:00pm",
-        "id": "b41f"
-    },
-    {
-        "title": "Call Mom",
-        "text": "soon",
-        "id": "ab61"
-    },
-    {
-        "title": "Pick up medication",
-        "text": "t",
-        "id": "0978"
-    }
+    
 ]
